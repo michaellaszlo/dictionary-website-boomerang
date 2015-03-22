@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Open+Sans::latin', 'Bitter::latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+    '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+</script>
+  <title>The Devil's Dictionary<?code fmt.Print(titleExtension) ?></title>
+  <link rel="stylesheet" href="/css/dictionary.css" />
+</head>
+<body>
+<div id="wrapper">
+
+<?code
+  linkClass := "title"
+  if request == "/" {
+    linkClass += " home"
+  } else {
+    linkClass += " notHome"
+  }
+?>
+<h1><a href="/" class="<?code fmt.Print(linkClass) ?>"
+     >The Devil's Dictionary<div class="homeLinkIcon"></div></a></h1>
+
+<?code
+  // Open a connection to the database.
+
+  dbPath := filepath.Join(root, "db/dictionary.sq3")
+  db, _ := sql.Open("sqlite3", dbPath)
+
+
+  // Run a database query to get the sorted list of initial letters.
+
+  query := "select distinct substr(word, 1, 1) as initial from entries" +
+      " order by initial";
+  rows, _ := db.Query(query)
+  initials := []string{}
+  for rows.Next() {
+    var initial string
+    rows.Scan(&initial)
+    initials = append(initials, initial)
+  }
+
+
+  // Print the initial letters as links to listing pages.
+
+  fmt.Print("<ul class=\"large listing\">")
+
+  for _, initial := range initials {
+    path := "/listing/"+initial+"/"
+    insert := ""
+    if path == request {
+      insert = " class=\"currentListing\""
+    } else if utf8.RuneCountInString(word) > 0 &&
+        string([]rune(word)[:1]) == initial {
+      insert = " class=\"relatedListing\""
+    }
+    display := strings.ToUpper(initial)
+    link := "<a href=\"" + path + "\"" + insert + ">" + display + "</a>"
+    fmt.Print("<li>" + link + "</li><wbr />")
+  }
+  first := initials[0]
+  last := initials[len(initials)-1]
+  label := strings.ToUpper(first + "&#8209;" + last)
+  fmt.Print("<li class=\"long\"><a href=\"/listing/\">" +
+      label + "</a></li></ul>")
+
+  fmt.Print("</ul>\n")
+
+?>
