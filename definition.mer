@@ -1,0 +1,6 @@
+<div class="definition">
+
+<?code fmt.Print(definition) ?>
+
+
+</div><!--end definition-->

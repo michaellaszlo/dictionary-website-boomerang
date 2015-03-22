@@ -1,0 +1,42 @@
+<?code
+
+  response := &http.Response{ ProtoMajor: 1, ProtoMinor: 1, StatusCode: 404 }
+  response.Write(os.Stdout)
+
+  titleExtension := " : page not found"
+  word := ""
+?>
+  <?insert /header.mer ?>
+<html>
+<body>
+<h1> The devil you say. Page not found! </h1>
+
+<?code
+
+  if originalRequest != "" {
+?>
+
+<p> You requested: </p>
+
+<pre> <?code fmt.Print(originalRequest) ?> </pre>
+
+<p> There is no such page. </p>
+
+<p> Perhaps you'd like to visit our <a href="/">home page</a>? </p>
+
+<?code
+  }
+
+  if exitMessage != "" {
+?>
+
+<p> <?code fmt.Print(exitMessage) ?> </p>
+
+<?code
+  }
+?>
+  <?insert /footer.mer ?>
+
+<?code
+  return
+?>
