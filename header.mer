@@ -1,3 +1,6 @@
+<?code
+  fmt.Print("Content-Type: text/html\n\n")
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -34,15 +37,10 @@
      >The Devil's Dictionary<div class="homeLinkIcon"></div></a></h1>
 
 <?code
-  // Open a connection to the database.
-
-  dbPath := filepath.Join(root, "db/dictionary.sq3")
-  db, _ := sql.Open("sqlite3", dbPath)
-
 
   // Run a database query to get the sorted list of initial letters.
 
-  query := "select distinct substr(word, 1, 1) as initial from entries" +
+  query = "select distinct substr(word, 1, 1) as initial from entries" +
       " order by initial";
   rows, _ := db.Query(query)
   initials := []string{}

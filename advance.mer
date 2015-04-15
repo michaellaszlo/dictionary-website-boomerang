@@ -1,0 +1,15 @@
+<?code
+  root := os.Getenv("DOCUMENT_ROOT")
+  dbPath := filepath.Join(root, "db/dictionary.sq3")
+  db, err := sql.Open("sqlite3", dbPath)
+  if err != nil {
+    fmt.Printf("unable to open %s: %s\n", dbPath, err)
+    return
+  }
+  var query, exitMessage string
+  //logFile, err := os.OpenFile("log.txt", os.O_APPEND | os.O_WRONLY, 0666)
+  //if err != nil {
+  //  fmt.Fprintf(os.Stderr, "os.OpenFile error: %s\n", err)
+  //}
+  //defer logFile.Close()
+?>

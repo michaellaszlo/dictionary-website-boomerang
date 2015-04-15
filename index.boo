@@ -6,14 +6,13 @@ import (
   "strings"
   "unicode/utf8"
   "regexp"
-  "net/http"
   "path/filepath"
   "database/sql"
+  _ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
-  root := os.Getenv("DOCUMENT_ROOT")
-  var exitMessage string
+?> <?insert /advance.mer ?> <?code
 
   request := os.Getenv("REQUEST_URI")
   originalRequest := request
@@ -31,10 +30,12 @@ func main() {
   // Construct the canonical URL for this page.
   canonicalRequest := "/"
   // Redirect to the canonical URL if necessary.
+  //fmt.Fprintf(logFile, "%s  originalRequest = \"%s\", request = \"%s\"" +
+  //    ", canonicalRequest = \"%s\"\n",
+  //    time.Now().Format(time.Stamp), originalRequest, request, canonicalRequest)
   if originalRequest != canonicalRequest {
-    response := &http.Response{ ProtoMajor: 1, ProtoMinor: 1, StatusCode: 301,
-        Header: http.Header{ "Location": { canonicalRequest } } }
-    response.Write(os.Stdout)
+    fmt.Print("Status: 301 Moved Permanently\n")
+    fmt.Printf("Location: %s\n\n", canonicalRequest)
     return
   }
 
@@ -64,12 +65,12 @@ func main() {
 
 <p> <i>The Devil's Dictionary</i> is the work of the American writer <a
 href="http://en.wikipedia.org/wiki/Ambrose_Bierce">Ambrose Bierce</a>,
-who also wrote the short story "An Occurrence at Owl Creek Bridge". Bierce
-began to write satirical dictionary definitions in 1875 and published
-them sporadically in his newspaper columns in the ensuing decades. The
-first collected edition of his dictionary appeared in 1906. While some
-of Bierce's allusions may be outmoded, his observations of human frailty
-remain sharp and true. </p>
+whose oeuvre includes the heavily anthologized short story "An Occurrence
+at Owl Creek Bridge". Bierce began to write satirical dictionary
+definitions in 1875. For several decades, he wrote them sporadically
+in newspaper columns. The first book-length collection of his devilish
+definitions appeared in 1906. While some of Bierce's allusions are
+outmoded, his observations of human frailty remain sharp and true. </p>
 
 
   <?insert /footer.mer ?>

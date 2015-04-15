@@ -1,7 +1,5 @@
 <?code
-
-  response := &http.Response{ ProtoMajor: 1, ProtoMinor: 1, StatusCode: 404 }
-  response.Write(os.Stdout)
+  fmt.Print("Status: 404 Not Found\n")
 
   titleExtension := " : page not found"
   word := ""
