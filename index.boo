@@ -52,6 +52,7 @@ func main() {
 
   query = "select word from entries order by random() limit 1"
   db.QueryRow(query).Scan(&word)
+  word = "academe"
 
   // Look up the definition of that word.
 
@@ -63,14 +64,13 @@ func main() {
 
 <h2> About this dictionary </h2>
 
-<p> <i>The Devil's Dictionary</i> is the work of the American writer <a
+<p> <i>The Devil's Dictionary</i> is by the American writer <a
 href="http://en.wikipedia.org/wiki/Ambrose_Bierce">Ambrose Bierce</a>,
-whose oeuvre includes the heavily anthologized short story "An Occurrence
-at Owl Creek Bridge". Bierce began to write satirical dictionary
-definitions in 1875. For several decades, he wrote them sporadically
-in newspaper columns. The first book-length collection of his devilish
-definitions appeared in 1906. While some of Bierce's allusions are
-outmoded, his observations of human frailty remain sharp and true. </p>
+whose works include the eerie short story "An Occurrence at Owl Creek
+Bridge". Bierce's satirical dictionary definitions appeared sporadically
+in newspapers starting in 1875. The first book-length collection
+appeared in 1906. Though cloaked in antique words, Bierce's wit still
+cuts today. </p>
 
 
   <?insert /footer.mer ?>
