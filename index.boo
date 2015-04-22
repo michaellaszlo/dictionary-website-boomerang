@@ -12,6 +12,7 @@ import (
 )
 
 func main() {
+  defer runtime.PrintCGI()
 ?> <?insert /advance.mer ?> <?code
 
   request := os.Getenv("REQUEST_URI")
@@ -34,8 +35,8 @@ func main() {
   //    ", canonicalRequest = \"%s\"\n",
   //    time.Now().Format(time.Stamp), originalRequest, request, canonicalRequest)
   if originalRequest != canonicalRequest {
-    fmt.Print("Status: 301 Moved Permanently\n")
-    fmt.Printf("Location: %s\n\n", canonicalRequest)
+    runtime.Print("Status: 301 Moved Permanently\n")
+    runtime.Printf("Location: %s\n\n", canonicalRequest)
     return
   }
 
@@ -52,7 +53,6 @@ func main() {
 
   query = "select word from entries order by random() limit 1"
   db.QueryRow(query).Scan(&word)
-  word = "academe"
 
   // Look up the definition of that word.
 
@@ -68,9 +68,8 @@ func main() {
 href="http://en.wikipedia.org/wiki/Ambrose_Bierce">Ambrose Bierce</a>,
 whose works include the eerie short story "An Occurrence at Owl Creek
 Bridge". Bierce's satirical dictionary definitions appeared sporadically
-in newspapers starting in 1875. The first book-length collection
-appeared in 1906. Though cloaked in antique words, Bierce's wit still
-cuts today. </p>
+in newspapers starting in 1875. The first book-length collection appeared
+in 1906. </p>
 
 
   <?insert /footer.mer ?>

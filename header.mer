@@ -1,6 +1,4 @@
-<?code
-  fmt.Print("Content-Type: text/html; charset=utf-8\n\n")
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -18,7 +16,7 @@
     s.parentNode.insertBefore(wf, s);
   })();
 </script>
-  <title>The Devil's Dictionary<?code fmt.Print(titleExtension) ?></title>
+  <title>The Devil's Dictionary<?code runtime.Print(titleExtension) ?></title>
   <link rel="stylesheet" href="/css/dictionary.css" />
 </head>
 <body>
@@ -32,7 +30,7 @@
     linkClass += " notHome"
   }
 ?>
-<h1><a href="/" class="<?code fmt.Print(linkClass) ?>"
+<h1><a href="/" class="<?code runtime.Print(linkClass) ?>"
      >The Devil's Dictionary<div class="homeLinkIcon"></div></a></h1>
 
 <?code
@@ -52,7 +50,7 @@
 
   // Print the initial letters as links to listing pages.
 
-  fmt.Print("<ul class=\"large listing\">")
+  runtime.Print("<ul class=\"large listing\">")
 
   for _, initial := range initials {
     path := "/listing/"+initial+"/"
@@ -65,14 +63,14 @@
     }
     display := strings.ToUpper(initial)
     link := "<a href=\"" + path + "\"" + insert + ">" + display + "</a>"
-    fmt.Print("<li>" + link + "</li><wbr />")
+    runtime.Print("<li>" + link + "</li><wbr />")
   }
   first := initials[0]
   last := initials[len(initials)-1]
   label := strings.ToUpper(first + "&#8209;" + last)
-  fmt.Print("<li class=\"long\"><a href=\"/listing/\">" +
+  runtime.Print("<li class=\"long\"><a href=\"/listing/\">" +
       label + "</a></li></ul>")
 
-  fmt.Print("</ul>\n")
+  runtime.Print("</ul>\n")
 
 ?>

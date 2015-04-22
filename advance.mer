@@ -3,7 +3,7 @@
   dbPath := filepath.Join(root, "db/dictionary.sq3")
   db, err := sql.Open("sqlite3", dbPath)
   if err != nil {
-    fmt.Printf("unable to open %s: %s\n", dbPath, err)
+    runtime.Printf("unable to open %s: %s\n", dbPath, err)
     return
   }
   var query, exitMessage string

@@ -1,5 +1,5 @@
 <?code
-  fmt.Print("Status: 404 Not Found\n")
+  runtime.Print("Status: 404 Not Found\n")
 
   titleExtension := " : page not found"
   word := ""
@@ -16,7 +16,7 @@
 
 <p> You requested: </p>
 
-<pre> <?code fmt.Print(originalRequest) ?> </pre>
+<pre> <?code runtime.Print(originalRequest) ?> </pre>
 
 <p> There is no such page. </p>
 
@@ -28,7 +28,7 @@
   if exitMessage != "" {
 ?>
 
-<p> <?code fmt.Print(exitMessage) ?> </p>
+<p> <?code runtime.Print(exitMessage) ?> </p>
 
 <?code
   }

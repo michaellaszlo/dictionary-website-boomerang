@@ -13,6 +13,7 @@ import (
 )
 
 func main() {
+  defer runtime.PrintCGI()
 ?> <?insert /advance.mer ?> <?code
 
   request := os.Getenv("REQUEST_URI")
@@ -56,8 +57,8 @@ func main() {
   canonicalRequest := "/" + parts[1] + "/" + url.QueryEscape(word) + "/"
   // Redirect to the canonical URL if necessary.
   if originalRequest != canonicalRequest {
-    fmt.Print("Status: 301 Moved Permanently\n")
-    fmt.Printf("Location: %s\n\n", canonicalRequest)
+    runtime.Print("Status: 301 Moved Permanently\n")
+    runtime.Printf("Location: %s\n\n", canonicalRequest)
     return
   }
 
@@ -65,7 +66,7 @@ func main() {
 ?>
   <?insert /header.mer ?>
 
-<h2> <?code fmt.Print(word) ?>: </h2>
+<h2> <?code runtime.Print(word) ?>: </h2>
 
   <?insert /definition.mer ?>
 

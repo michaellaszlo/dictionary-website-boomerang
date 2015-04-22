@@ -3,6 +3,7 @@ package main
 
 import (
   "os"
+  "fmt"
   "strings"
   "unicode/utf8"
   "regexp"
@@ -13,6 +14,7 @@ import (
 )
 
 func main() {
+  defer runtime.PrintCGI()
 ?> <?insert /advance.mer ?> <?code
 
   request := os.Getenv("REQUEST_URI")
@@ -95,8 +97,8 @@ func main() {
 
   // Redirect to the canonical URL if necessary.
   if (originalRequest != canonicalRequest) {
-    fmt.Print("Status: 301 Moved Permanently\n")
-    fmt.Printf("Location: %s\n\n", canonicalRequest)
+    runtime.Print("Status: 301 Moved Permanently\n")
+    runtime.Printf("Location: %s\n\n", canonicalRequest)
     return
   }
 
@@ -104,7 +106,7 @@ func main() {
 ?>
   <?insert /header.mer ?>
 
-<h2> <?code fmt.Print(title) ?>: </h2>
+<h2> <?code runtime.Print(title) ?>: </h2>
 
 <ul class="listing">
 <?code
@@ -116,7 +118,7 @@ func main() {
     word = strings.Replace(word, " ", "&nbsp;", -1)
     link := fmt.Sprintf("<a href=\"%s\">%s</a>", path, word)
 ?>
-    <li><?code fmt.Print(link) ?></li><wbr />
+    <li><?code runtime.Print(link) ?></li><wbr />
 <?code
   }
 ?>
