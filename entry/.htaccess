@@ -1,1 +1,3 @@
+DirectoryIndex /entry/index.cgi
 FallbackResource /entry/index.cgi
+
