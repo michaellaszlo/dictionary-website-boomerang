@@ -1,4 +1,11 @@
 # dictionary-website-boomerang
-A dictionary website implemented with Boomerang
 
-In this project, I use my Boomerang system -- github.com/michaellaszlo/boomerang -- to rewrite my PHP dictionary site -- github.com/michaellaszlo/dictionary-website-php -- into a similar set of templates that use the Go language in place of PHP.
+## A dictionary website implemented with Boomerang
+
+This repository contains a remake of a [dictionary
+website](https://github.com/michaellaszlo/dictionary-website-php) that was
+written in PHP. The new website is visually and functionally identical to
+the old one. The difference is that it was written with the [Boomerang
+web template system](https://github.com/michaellaszlo/boomerang), which
+uses the [Go language](https://golang.org/).
+
